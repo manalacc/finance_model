@@ -59,14 +59,18 @@ def main():
         revenue_var_pct = revenue_var / budget_revenue if budget_revenue != 0 else 0 # type: ignore
         cost_var = actual_cost - budget_cost # type: ignore
         margin_diff = (budget_gross_profit / budget_revenue if budget_revenue != 0 else 0) - (((actual_revenue - actual_cost) / actual_revenue) if actual_revenue != 0 else 0) # type: ignore
+        budget_gross_margin = budget_gross_profit / budget_revenue if budget_revenue != 0 else 0 # type: ignore
+        actual_gross_margin = (actual_revenue - actual_cost) / actual_revenue if actual_revenue != 0 else 0 # type: ignore
         actual_rows.append([
             months[i], budget_revenue, actual_revenue, revenue_var,
-            revenue_var_pct, budget_cost, actual_cost, cost_var, margin_diff
+            revenue_var_pct, budget_cost, actual_cost, cost_var, margin_diff,
+            actual_gross_margin, budget_gross_margin
         ])
 
     actuals_df = pd.DataFrame(actual_rows, columns=[
         "Month", "Budget Revenue", "Actual Revenue", "Variance ($)", "Variance (%)",
-        "Budget Cost", "Actual Cost", "Cost Variance ($)", "Margin Diff (%)"
+        "Budget Cost", "Actual Cost", "Cost Variance ($)", "Margin Diff (%)",
+        "Actual Gross Margin (%)", "Budget Gross Margin (%)"
     ])
 
     # Write to Excel
