@@ -11,8 +11,20 @@ def main():
     else:
         raise ValueError("No active worksheet found in the workbook.")
 
-    # Perform data analysis
     df = pd.read_excel("../data/Budget_vs_Actuals_Template.xlsx", sheet_name="Actuals & Variance")
+
+    # Key totals
+    total_budget_rev = df['Budget Revenue'].sum()
+    total_actual_rev = df['Actual Revenue'].sum()
+    total_budget_exp = df['Budget Cost'].sum()
+    total_actual_exp = df['Actual Cost'].sum()
+    total_profit = total_actual_rev - total_actual_exp
+
+    # Variance extremes
+    best_month = df.loc[df['Variance ($)'].idxmax(), 'Month']
+    best_val = df['Variance ($)'].max()
+    worst_month = df.loc[df['Variance ($)'].idxmin(), 'Month']
+    worst_val = df['Variance ($)'].min()
 
     # top 3 months where actual revenue was below budget
     below_budget_rev = df[df["Actual Revenue"] < df["Budget Revenue"]]
@@ -95,16 +107,16 @@ def main():
     plt.savefig("../charts/monthly_cost_variance.png", dpi=300, bbox_inches='tight')
     plt.close()
 
-    # pie chart: cost breakdown
-    plt.figure(figsize=(8, 8))
-    cost_breakdown = df[["Month", "Actual Cost", "Budget Cost"]].set_index("Month")
-    cost_breakdown.plot.pie(y="Actual Cost", autopct="%1.1f%%", startangle=90, legend=False, ax=plt.gca())
-    plt.title("Cost Breakdown: Actual vs Budget")
-    plt.ylabel("")
-    plt.tight_layout()
-    plt.savefig("../charts/cost_breakdown.png", dpi=300, bbox_inches='tight')
-    plt.close()
+    summary = f"""
+    For the period, total revenue was ${total_actual_rev:,.0f} 
+    vs a budget of ${total_budget_rev:,.0f}, a variance of {((total_actual_rev-total_budget_rev)/total_budget_rev)*100:.1f}%.
+    Total expenses were ${total_actual_exp:,.0f} vs a budget of ${total_budget_exp:,.0f}.
+    Net profit reached ${total_profit:,.0f}.
+    The best revenue month was {best_month} (+${best_val:,.0f} variance) 
+    and the worst was {worst_month} ({worst_val:,.0f} variance).
+    """
 
+    print(summary)
     return 0
 
 if __name__ == "__main__":

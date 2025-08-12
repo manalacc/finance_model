@@ -70,7 +70,7 @@ def main():
     actuals_df = pd.DataFrame(actual_rows, columns=[
         "Month", "Budget Revenue", "Actual Revenue", "Variance ($)", "Variance (%)",
         "Budget Cost", "Actual Cost", "Cost Variance ($)", "Margin Diff (%)", "Budget Gross Margin (%)",
-        "Actual Gross Margin (%)",
+        "Actual Gross Margin (%)", 
     ])
 
     # Write to Excel
@@ -89,7 +89,7 @@ def main():
     for r in dataframe_to_rows(actuals_df, index=False, header=True):
         ws_actuals.append(r)
     
-    # cosmetics
+    # cosmetics 
     for sheet in [ws_inputs, ws_budget, ws_actuals]:
         # Apply bold font to headers
         for cell in sheet[1]:
