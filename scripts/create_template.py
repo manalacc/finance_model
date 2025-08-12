@@ -69,8 +69,8 @@ def main():
 
     actuals_df = pd.DataFrame(actual_rows, columns=[
         "Month", "Budget Revenue", "Actual Revenue", "Variance ($)", "Variance (%)",
-        "Budget Cost", "Actual Cost", "Cost Variance ($)", "Margin Diff (%)",
-        "Actual Gross Margin (%)", "Budget Gross Margin (%)"
+        "Budget Cost", "Actual Cost", "Cost Variance ($)", "Margin Diff (%)", "Budget Gross Margin (%)",
+        "Actual Gross Margin (%)",
     ])
 
     # Write to Excel
