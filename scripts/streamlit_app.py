@@ -57,7 +57,7 @@ cost_variance = df_chart['Actual Cost'].sum() - df_chart['Budget Cost'].sum()
 total_cost_variance = df_chart['Cost Variance'].sum()
 
 # ======================
-# Dashboard main panel
+# Dashboard main panels
 col = st.columns((1.5, 4, 2.5), gap='medium')
 
 with col[0]:
@@ -71,7 +71,10 @@ with col[0]:
         )
 
     st.metric(label="Total Budget Cost", value=f"${df_chart['Budget Cost'].sum():,.0f}")
-    st.metric(label="Total Actual Cost", value=f"${df_chart['Actual Cost'].sum():,.0f}", delta=f"{cost_variance:,.0f}", delta_color="inverse" if cost_variance < 0 else "normal")
+    st.metric(label="Total Actual Cost",
+              value=f"${df_chart['Actual Cost'].sum():,.0f}",
+              delta=f"{cost_variance:,.0f}",
+              delta_color="inverse")
 
     st.metric(label="Total Cost Variance", value=f"${df_chart['Cost Variance'].sum():,.0f}")
     st.metric(label="Total Gross Margin (%)", value=f"{df_chart['Gross Margin (%)'].mean():.1f}%")
