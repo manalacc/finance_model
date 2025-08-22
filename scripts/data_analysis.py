@@ -64,18 +64,13 @@ def main():
     worst_val = variance_analysis['worst_val']
 
     # top 3 months where actual revenue was below budget
-    top_3_below_rev = analysis.get_top_below_budget_revenue()
+    # top_3_below_rev = analysis.get_top_below_budget_revenue()
 
     # top 3 cost overruns
-    top_3_cost_overruns = analysis.get_top_cost_overruns()
+    # top_3_cost_overruns = analysis.get_top_cost_overruns()
 
     # months with the largest gross margin drops
-    largest_gross_margin_drops = analysis.get_largest_gross_margin_drops()
-
-    # print(top_3_below_rev)
-    # print(top_3_cost_overruns)
-    # print(largest_gross_margin_drops)
-
+    # largest_gross_margin_drops = analysis.get_largest_gross_margin_drops()
 
     # make_chart(df, title="Budget vs Actual Revenue", x_label="Month", y_label="Revenue ($)", metrics=["Budget Revenue", "Actual Revenue"], chart_type='line')
 
